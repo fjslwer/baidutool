@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>百度域名采集工具</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .container { max-width: 600px; margin: auto; }
+        input[type="text"] { width: 70%; padding: 8px; }
+        input[type="submit"] { padding: 8px 16px; }
+        ul { list-style-type: none; padding: 0; }
+        li { padding: 5px 0; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>百度搜索前五页域名采集</h2>
+        <form method="post">
+            <input type="text" name="keyword" placeholder="请输入关键词" value="{{ keyword }}">
+            <input type="submit" value="采集">
+        </form>
+        {% if keyword %}
+            <h3>关键词: {{ keyword }}</h3>
+            {% if domains %}
+                <p>共找到 {{ domains|length }} 个域名:</p>
+                <ul>
+                    {% for domain in domains %}
+                        <li>{{ domain }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="error">未找到域名，请检查关键词或稍后重试。</p>
+            {% endif %}
+        {% endif %}
+    </div>
+</body>
+</html>
